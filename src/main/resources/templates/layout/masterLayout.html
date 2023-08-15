@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html th:fragment="layout(main)" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css"
+        th:href="@{/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" href="../../static/bootstrap/css/custom.css"
+        th:href="@{/bootstrap/css/custom.css}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
+</head>
+<body>
+        <div th:replace="fragments/navbar.html :: navbar"></div>
+        <div id="overlay"></div>
+        <section class="text-white">
+               <!-- -->
+                <div id="headimg" class="jumbotron jumbotron-fluid
+                justify-content-center">
+                    <div class="container">
+                        <h1 class="display-4">Amazing Book Store</h1>
+                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, inventore?</p>
+                        <a href="#" class="btn btn-info btn-lg">Read More</a>
+                    </div>
+                </div>
+
+        </section>
+
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+                <h3><a th:href="@{/book/books/view/cart}"><i class="fas fa-shopping-cart mr-1"></i></a><span class="badge badge-info" th:text="${cartSize}"></span></h3>
+            </div>
+        </div>
+
+
+
+
+
+    <div th:replace="${main}"></div>
+
+
+    <div th:replace="fragments/footer.html :: footer"></div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

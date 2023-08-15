@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html th:replace="layout/masterLayout :: layout(~{::main})" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<main role="main">
+    <div class="container my-5">
+        <div th:if="${cartItems.isEmpty()}">
+            <p class="lead h3 text-center text-info">No Content.................</p>
+        </div>
+        <div class="row">
+            <div class="col" th:if="${!cartItems.isEmpty()}">
+                <form th:action="@{/book/checkout}" th:object="${book}"
+                      method="post">
+                    <div class="card">
+                        <div class="card-header">
+
+                            <h3>CartView</h3>
+                        </div>
+                        <table class="table table-striped">
+
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th th:if="${!action}">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="item : ${cartItems}">
+                                <td th:text="${item.id}"></td>
+                                <td th:text="${item.title}"></td>
+                                <td th:text="${item.author}"></td>
+                                <td th:text="${'$'+item.price}"><td>&nbsp; &star;</td></td>
+                                <td>
+
+                                <span th:if="${item.renderer}" th:text="${item.quantity}">item</span>
+                                <input type="number" th:field="*{quantityList}" size="5" class="form-control"
+                                       th:if="${!item.renderer}">
+
+                                <span th:if="${item.renderer}" th:text="${'::'+item.sum}"></span>
+                                </td>
+
+
+                                <td>
+                                    <a th:href="@{'/book/delete?id='+${item.id}}" th:if="${!item.renderer}"
+                                       class="btn btn-outline-danger">Delete</a>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>Total :: <span class="h3 text-muted" th:text="${'$'+totalPrice}"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="card-footer">
+                            <a th:href="@{/book/books}" class="btn btn-primary">ContinueShopping</a>
+                            <a th:href="@{/book/remove/all}" class="btn btn-outline-danger">ClearCart</a>
+                            <input type="submit" th:href="@{/book/checkout}" class="btn btn-success"
+                                   value="CheckOut"></input>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
